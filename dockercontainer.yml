@@ -1,0 +1,19 @@
+---
+-
+  name: Playbook for container test
+  hosts: "ansibleworker"
+
+  tasks:
+    - 
+      name: Pulling the image
+      command: "docker image pull yogeshraheja/sndemo:v1"
+    -
+      name: container creation
+      command: "docker container run -itd --name=webtest -p 82:80 yogeshraheja/sndemo:v1"
+    - 
+      name: List of containers
+      command: "docker container ls -a"
+      register: containeroutput
+    - 
+      name: Container list output
+      debug: var=containeroutput
